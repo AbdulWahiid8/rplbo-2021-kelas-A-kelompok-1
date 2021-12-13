@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSuratsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('surats', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama', 255);
+            $table->string('nis')->unique()->nullable();
+            $table->string('email');
+            $table->string('perihal', 255);
+            $table->string('nomor_surat');
+            $table->string('nomor_telp');
+            $table->string('lampiran')->nullable();
+            $table->string('date');
+            $table->timestamp('konfirmasi_surat')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('surats');
+    }
+}

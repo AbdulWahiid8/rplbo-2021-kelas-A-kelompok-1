@@ -1,0 +1,17 @@
+.font-down-brand {
+    font-size: 15px;
+    margin-top: -13px;
+}
+
+.font-header {
+    color: #5260D7;
+    font-size: 20px;
+    margin-left: 70px;
+}
+
+.form-surat {
+    color: #34395e;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
