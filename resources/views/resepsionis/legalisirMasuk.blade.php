@@ -1,18 +1,17 @@
-<x-master-layout title="Surat Masuk">
+<x-master-layout title="Legalisir">
     @section('content')
         <section class="section">
             <section class="section-header">
-                <h1>Surat Masuk</h1>
+                <h1>Legaslisir</h1>
             </section>
             <div class="card">
-                {{-- @foreach (\App\Models\Legalisir::get() as $item) --}}
                 <div class="card-body mt-4">
                   <div class="table-responsive">
                     <table class="table table-bordered table-lg">
                       <tr>
                         <th>No</th>
                         <th>Tanggal</th>
-                        <th>Nomor Surat</th>
+                        <th>NIS</th>
                         <th>Pengirim</th>
                         <th>Perihal</th>
                         <th>Status</th>
@@ -22,15 +21,15 @@
                       <tr>
                         <td>{{ $number + 1 }}</td>
                         <td>{{ $item->date }}</td>
-                        <td>{{ $item->nomor_surat }}</td>
+                        <td>{{ $item->nis }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->perihal }}</td>
-                    @if (!$item->konfirmasi_surat)
+                    @if (!$item->konfirmasi_leges)
                         <td><div class="badge badge-danger">Belum Konfirmasi</div></td>
                     @else
                         <td><div class="badge badge-success">Terkonfirmasi</div></td>
                     @endif
-                        <td><a href="{{ route('suratmasuk.detail', $item->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ route('legalisirmasuk.detail', $item->id) }}" class="btn btn-primary">Detail</a></td>
                       </tr>
                     @endforeach
                     </table>

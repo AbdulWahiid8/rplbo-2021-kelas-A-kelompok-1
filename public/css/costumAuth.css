@@ -1,0 +1,35 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    height: auto;
+    background: white;
+}
+.card {
+    border-radius: 20px;
+}
+.form-input input {
+    border-radius: 10px;
+}
+.icon-login p {
+    color: #6874DC;
+    font-size: 23px;
+    font-weight: bold;
+}
+.form-input {
+    margin: 0 8px;
+}
+.font-pass a {
+    color: #4451C2;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.btn-submit {
+    background: #4451C2;
+    color: white;
+    font-weight: 500;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.btn-submit:hover {
+    background: #3440aa;
+    color: white;
+}

@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\IsKepSek;
+use App\Http\Middleware\IsKTU;
+use App\Http\Middleware\IsResepsionis;
+use App\Http\Middleware\IsStaf;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +67,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'resepsionis' => \App\Http\Middleware\IsResepsionis::class,
+        'staf' => \App\Http\Middleware\IsStaf::class,
+        'ktu' => \App\Http\Middleware\IsKTU::class,
+        'kepala.sekolah' => \App\Http\Middleware\IsKepSek::class
     ];
 }

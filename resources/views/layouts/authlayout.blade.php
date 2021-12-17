@@ -11,9 +11,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/costumAuth.js') }}"></script>
+
+    {{-- font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/costumAuth.css') }}">
 </head>
 <body>
     <div class="bg-white">
@@ -21,5 +26,7 @@
            {{ $slot }}
         </main>
     </div>
+
+     <script src="{{ asset('js/costumAuth.js') }}"></script>
 </body>
 </html>

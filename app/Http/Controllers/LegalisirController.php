@@ -15,9 +15,20 @@ class LegalisirController extends Controller
      */
     public function index()
     {
-        //
+        $data = \App\Models\Legalisir::get();
+        return view('resepsionis.legalisirMasuk',[
+            'data' => $data
+        ]);
     }
 
+    public function detail($id)
+    {
+        // $data = $legalisir->get('id');
+        // dd($data);
+        return view('resepsionis.detailLegalisir', [
+            'legalisir' => Legalisir::find($id),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

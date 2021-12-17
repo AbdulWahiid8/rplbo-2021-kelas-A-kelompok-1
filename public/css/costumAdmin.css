@@ -15,3 +15,16 @@
     font-weight: 600;
     letter-spacing: .5px;
 }
+.detail {
+    margin-top: -7px;
+}
+.detail-up {
+margin-left: 150px;
+}
+.line-hr {
+    width: 95%;
+}
+.detail i{
+    color: #f05619;
+}
+

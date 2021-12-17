@@ -13,6 +13,6 @@ class LegalisirSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Legalisir::factory(5)->create();
     }
 }

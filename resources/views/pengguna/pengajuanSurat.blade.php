@@ -7,7 +7,7 @@
         <div class="row">
             <h1 class="font-header"> Silakan Isi Form (Form Tidak Boleh Kosong)</h1>
         </div>
-        <form action="{{ Route('surat.create') }}" class="needs-validation px-5 mt-3" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="{{ route('surat.create') }}" class="needs-validation px-5 mt-3" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="card">
                 <div class="card-body">
@@ -99,6 +99,7 @@
                             <input id="date" name="date" type="date" class="form-control datepicker" required>
                         </div>
                     </div>
+                    <!-- <small class="text-secondary">Pastikan data yang anda isi benar</small> -->
                     <div class="card-footer text-right">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

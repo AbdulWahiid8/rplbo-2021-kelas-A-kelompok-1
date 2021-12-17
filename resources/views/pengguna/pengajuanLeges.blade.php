@@ -7,7 +7,7 @@
          <div class="row">
             <h1 class="font-header"> Silakan Isi Form (Form Tidak Boleh Kosong)</h1>
         </div>
-        <form action="{{ Route('leges.create') }}" method="POST" class="needs-validation px-5 mt-3" enctype="multipart/form-data" novalidate>
+        <form action="{{ route('legalisir.create') }}" method="POST" class="needs-validation px-5 mt-3" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="card">
                 <div class="card-body">

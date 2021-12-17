@@ -268,14 +268,14 @@
           <ul class="sidebar-menu mt-4">
               <li class="menu-header">Dashboard</li>
               <li class="{{ active_item('Dashboard.resepsionis') }}">
-                <a href="{{ Route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
               </li>
               <li class="menu-header">More</li>
               <li class="{{ active_item('suratmasuk') }}">
-                <a class="nav-link" href="{{ Route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
               </li>
-              <li class="{{ active_item('pengajuanLeges') }}">
-                <a class="nav-link" href="{{ Route('pengajuanLeges') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+              <li class="{{ active_item('legalisirmasuk') }}">
+                <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
               </li>
           </ul>
         <!-- END Resepsionis -->
@@ -290,8 +290,8 @@
               <li class="{{ active_item('pengajuanSurat') }}">
                 <a class="nav-link" href="{{ Route('pengajuanSurat') }}"><i class="fas fa-envelope mt-1"></i> <span>Pengajuan Surat</span></a>
               </li>
-              <li class="{{ active_item('pengajuanLeges') }}">
-                <a class="nav-link" href="{{ Route('pengajuanLeges') }}"><i class="far fa-sticky-note"></i><span>Pengajuan Leges</span></a>
+              <li class="{{ active_item('pengajuanLegalisir') }}">
+                <a class="nav-link" href="{{ Route('pengajuanLegalisir') }}"><i class="far fa-sticky-note"></i><span>Pengajuan Leges</span></a>
               </li>
               <li class="{{ active_item('pengumuman') }}">
                 <a class="nav-link" href="{{ Route('pengumuman') }}"><i class="fas fa-bullhorn mt-1"></i> <span>Pengumuman</span></a>

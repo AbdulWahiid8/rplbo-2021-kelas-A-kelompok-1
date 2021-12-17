@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Surat;
 use Illuminate\Http\Request;
 
 class SuratMasukController extends Controller
@@ -20,6 +21,28 @@ class SuratMasukController extends Controller
         ]);
     }
 
+    public function detail($id)
+    {
+        //dd($surat);
+        // $surat = \App\Models\Surat::get();
+        return view('resepsionis.detailSuratMasuk', [
+            'surat' => Surat::find($id),
+        ]);
+    }
+
+    public function confirm(Request $request)
+    {
+        // Surat::create([
+        //     'konfirmasi_surat' => $request->konfirmasi_surat
+        // ]);
+        $confirm = $request->validate([
+            'konfirmasi_surat' => 'confirmed'
+        ]);
+        // update($confirm);
+        Surat::where('nama', 'Dinas Pendidikan')->update($confirm);
+
+        return redirect()->route('suratmasuk');
+    }
     /**
      * Show the form for creating a new resource.
      *
