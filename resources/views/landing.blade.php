@@ -22,7 +22,7 @@
         <div class="row">
             <div class="logo col-md">
                <img class="d-inline" src="{{ url('image/tut-wuri-handayani.png') }}" alt="" width="48">
-               <a class="d-inline ms-3 fw-bold fs-5 text-decoration-none" href="{{ url('/home') }}">Masuk</a>
+               <a class="d-inline ms-3 fw-bold fs-5 text-decoration-none" href="{{ url('/login') }}">Masuk</a>
             </div>
             <div class="col-md text-nav me-4 text-end">
                 <p>MTSN 10 Pekanbaru</p>
@@ -35,7 +35,7 @@
                     <h1 class="font-up">Sistem Informasi</h1>
                     <h1 class="font-down">Satu Pintu</h1>
                     <p class="fs-4">Pelayanan Surat Menyurat</p>
-                    <a type="button" class="btn shadow rounded mt-3" href="{{ url('/Dashboard-resepsionis') }}">Pengajuan <i class="far fa-paper-plane ms-1"></i></a>
+                    <a type="button" class="btn shadow rounded mt-3" href="{{ url('/Dashboard') }}">Pengajuan <i class="far fa-paper-plane ms-1"></i></a>
                 </div>
                 <div class="col-md">
                     <img src="{{ url('image/bg-landing.png') }}" alt="">

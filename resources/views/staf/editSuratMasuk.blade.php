@@ -1,19 +1,16 @@
-<x-master-layout title="Pengajuan Surat">
+<x-master-layout title="Edit Surat Masuk">
     @section('content')
-    <section class="section">
-        <div class="section-header">
-            <h1>Form Pengajuan Surat</h1>
-        </div>
-        <div class="row">
-            <h1 class="font-header"> Silakan Isi Form (Form Tidak Boleh Kosong)</h1>
-        </div>
-        <form action="{{ route('surat.create') }}" class="needs-validation px-5 mt-3" method="POST" enctype="multipart/form-data" novalidate>
+        <section class="section">
+            <section class="section-header">
+                <h1>Edit Surat Masuk</h1>
+            </section>
+        <form action="{{ route('suratmasuk.update', $data->id) }}" class="needs-validation px-5 mt-3" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="nama">Nama / Instansi Pengirim <span class="text-danger">*</span></label>
-                        <input id="nama" name="namaSurat" type="text" class="form-control" required>
+                        <input id="nama" name="namaSurat" type="text" value="{{ $data->nama }}" class="form-control" required>
                         <div class="invalid-feedback">
                             Field Tidak Boleh Kosong!
                         </div>
@@ -26,7 +23,7 @@
                                    <i class="far fa-address-card"></i>
                                 </div>
                             </div>
-                            <input id="nis" name="nis" type="text" class="form-control phone-number">
+                            <input id="nis" name="nis" type="text" value="{{ $data->nis }}" class="form-control phone-number">
                         </div>
                             {{-- <p class="text-secondary">(-) Isi jika Tidak Ada</p> --}}
                         <div class="invalid-feedback">
@@ -41,7 +38,7 @@
                                     <i class="fas fa-phone"></i>
                                 </div>
                             </div>
-                            <input id="noTelp" name="telepon" type="text" class="form-control phone-number" required>
+                            <input id="noTelp" name="telepon" type="text" value="{{ $data->nomor_telp }}" class="form-control phone-number" required>
                         </div>
                         <div class="invalid-feedback">
                             Field Tidak Boleh Kosong!
@@ -55,7 +52,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <input id="email" name="email" type="email" class="form-control" required>
+                            <input id="email" name="email" type="email" value="{{ $data->email }}" class="form-control" required>
                         </div>
                         <div class="invalid-feedback">
                             Field Tidak Boleh Kosong!
@@ -69,7 +66,7 @@
                                     <i class="fas fa-envelope-open-text"></i>
                                 </div>
                             </div>
-                            <input id="perihal" name="perihal" type="text" class="form-control" required>
+                            <input id="perihal" name="perihal" type="text" value="{{ $data->perihal }}" class="form-control" required>
                         </div>
                         <div class="invalid-feedback">
                             Field Tidak Boleh Kosong!
@@ -83,7 +80,7 @@
                                     <i class="fas fa-pen-square"></i>
                                 </div>
                             </div>
-                            <input id="noSurat" name="noSurat" type="text" class="form-control" required>
+                            <input id="noSurat" name="noSurat" type="text" value="{{ $data->nomor_surat }}" class="form-control" required>
                         </div>
                         <div class="invalid-feedback">
                             Field Tidak Boleh Kosong!
@@ -96,16 +93,16 @@
                         </div>
                         <div class="col-md">
                             <label for="date">Tanggal <span class="text-danger">*</span></label>
-                            <input id="date" name="date" type="date" class="form-control datepicker" required>
+                            <input id="date" name="date" type="date" value="{{ $data->date }}" class="form-control datepicker" required>
                         </div>
                     </div>
                     <!-- <small class="text-secondary">Pastikan data yang anda isi benar</small> -->
                     <div class="card-footer text-right">
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
             </div>
         </form>
-    </section>
+        </section>
     @endsection
 </x-master-layout>

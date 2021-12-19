@@ -16,7 +16,8 @@ class Surat extends Model
         'perihal',
         'nomor_surat',
         'nomor_telp',
-        'date'
+        'date',
+        'lampiran'
     ];
 
     protected $casts = [

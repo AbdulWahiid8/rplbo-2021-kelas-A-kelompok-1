@@ -103,153 +103,44 @@
           </div>
         </form>
 
-        {{-- <ul class="navbar-nav navbar-right">
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right">
-              <div class="dropdown-header">Messages
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
+    @if (Auth::user())
+        <ul class="navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                <img alt="image" src="{{ asset('image/tut-wuri-handayani.png') }}" class="rounded-circle mr-1">
+                <div class="d-sm-none d-lg-inline-block">
+                    Hi, {{ Auth::user()->name }}
                 </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-message">
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle">
-                    <div class="is-online"></div>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Kusnaedi</b>
-                    <p>Hello, Bro!</p>
-                    <div class="time">10 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Dedik Sugiharto</b>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-3.png" class="rounded-circle">
-                    <div class="is-online"></div>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Agung Ardiansyah</b>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Ardian Rahardiansyah</b>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>
-                    <div class="time">16 Hours Ago</div>
-                  </div>
-                </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-avatar">
-                    <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle">
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Alfa Zulkarnain</b>
-                    <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                    <div class="time">Yesterday</div>
-                  </div>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right">
-              <div class="dropdown-header">Notifications
-                <div class="float-right">
-                  <a href="#">Mark All As Read</a>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right mt-2">
+                <div class="dropdown-title">
+                    You Are <strong class="text-primary fw-bold">{{ Auth::user()->role }}</strong>
                 </div>
-              </div>
-              <div class="dropdown-list-content dropdown-list-icons">
-                <a href="#" class="dropdown-item dropdown-item-unread">
-                  <div class="dropdown-item-icon bg-primary text-white">
-                    <i class="fas fa-code"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    Template update is available now!
-                    <div class="time text-primary">2 Min Ago</div>
-                  </div>
+                {{-- <a href="features-profile.html" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> Profile
                 </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-info text-white">
-                    <i class="far fa-user"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>You</b> and <b>Dedik Sugiharto</b> are now friends
-                    <div class="time">10 Hours Ago</div>
-                  </div>
+                <a href="features-activities.html" class="dropdown-item has-icon">
+                    <i class="fas fa-bolt"></i> Activities
                 </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-success text-white">
-                    <i class="fas fa-check"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
-                    <div class="time">12 Hours Ago</div>
-                  </div>
+                <a href="features-settings.html" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Settings --}}
                 </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-danger text-white">
-                    <i class="fas fa-exclamation-triangle"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    Low disk space. Let's clean it!
-                    <div class="time">17 Hours Ago</div>
-                  </div>
+                <div class="dropdown-divider"></div>
+                {{-- <a href="{{ url('/') }}" class="dropdown-item has-icon text-danger">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a> --}}
+                <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
                 </a>
-                <a href="#" class="dropdown-item">
-                  <div class="dropdown-item-icon bg-info text-white">
-                    <i class="fas fa-bell"></i>
-                  </div>
-                  <div class="dropdown-item-desc">
-                    Welcome to Stisla template!
-                    <div class="time">Yesterday</div>
-                  </div>
-                </a>
-              </div>
-              <div class="dropdown-footer text-center">
-                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-              </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
-          </li>
-          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5 min ago</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> Profile
-              </a>
-              <a href="features-activities.html" class="dropdown-item has-icon">
-                <i class="fas fa-bolt"></i> Activities
-              </a>
-              <a href="features-settings.html" class="dropdown-item has-icon">
-                <i class="fas fa-cog"></i> Settings
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="{{ url('/') }}" class="dropdown-item has-icon text-danger">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-            </div>
-          </li>
-        </ul> --}}
+        </li>
+        </ul>
+    @endif
       </nav>
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
@@ -264,29 +155,85 @@
           </div>
           {{-- end --}}
 
-        <!-- SibeBar Untuk Resepsionis -->
-          <ul class="sidebar-menu mt-4">
-              <li class="menu-header">Dashboard</li>
-              <li class="{{ active_item('Dashboard.resepsionis') }}">
+        @if (Auth::check() && Auth::user()->role === 'resepsionis')
+          <!-- SibeBar Untuk Resepsionis -->
+            <ul class="sidebar-menu mt-4">
+                <li class="menu-header">Dashboard</li>
+                <li class="{{ active_item('Dashboard.resepsionis') }}">
                 <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
-              </li>
-              <li class="menu-header">More</li>
-              <li class="{{ active_item('suratmasuk') }}">
+                </li>
+                <li class="menu-header">More</li>
+                <li class="{{ active_item('suratmasuk') }}">
                 <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
-              </li>
-              <li class="{{ active_item('legalisirmasuk') }}">
+                </li>
+                <li class="{{ active_item('legalisirmasuk') }}">
                 <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
-              </li>
-          </ul>
-        <!-- END Resepsionis -->
+                </li>
+            </ul>
+            <!-- END Resepsionis -->
 
+        @elseif (Auth::check() && Auth::user()->role === 'staf')
+            <!-- SibeBar Untuk Staf -->
+            <ul class="sidebar-menu mt-4">
+                <li class="menu-header">Dashboard</li>
+                <li class="{{ active_item('Dashboard.resepsionis') }}">
+                    <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                </li>
+                <li class="menu-header">Menu</li>
+                <li class="{{ active_item('suratmasuk.staf') }}">
+                    <a class="nav-link" href="{{ route('suratmasuk.staf') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                </li>
+                <li class="{{ active_item('legalisirmasuk') }}">
+                    <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                </li>
+                <li class="{{ active_item('suratkelaur') }}">
+                    <a class="nav-link" href="{{ route('suratkeluar') }}"><i class="fas fa-paper-plane ms-1"></i><span>Surat Keluar</span></a>
+                </li>
+                <li class="{{ active_item('legalisirkeluar') }}">
+                    <a class="nav-link" href="{{ route('legalisirkeluar') }}"><i class="fas fa-share-square"></i><span>Legalisir Keluar</span></a>
+                </li>
+            </ul>
+            <!-- END Staf -->
+        @elseif (Auth::check() && Auth::user()->role === 'ktu')
+            <!-- SibeBar Untuk Kepala Staf Tata Usaha -->
+            <ul class="sidebar-menu mt-4">
+                <li class="menu-header">Dashboard</li>
+                <li class="{{ active_item('Dashboard.resepsionis') }}">
+                <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                </li>
+                <li class="menu-header">Menu</li>
+                <li class="{{ active_item('suratmasuk') }}">
+                <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                </li>
+                <li class="{{ active_item('legalisirmasuk') }}">
+                <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                </li>
+            </ul>
+            <!-- END Kepala Staf Tata Usaha -->
+        @elseif (Auth::check() && Auth::user()->role === 'kepsek')
+            <!-- SibeBar Untuk Kepala Sekolah -->
+            <ul class="sidebar-menu mt-4">
+                <li class="menu-header">Dashboard</li>
+                <li class="{{ active_item('Dashboard.resepsionis') }}">
+                <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                </li>
+                <li class="menu-header">Menu</li>
+                <li class="{{ active_item('suratmasuk') }}">
+                <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                </li>
+                <li class="{{ active_item('legalisirmasuk') }}">
+                <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                </li>
+            </ul>
+            <!-- END Kepala Sekolah -->
+        @else
         <!-- SideBar untuk Pengguna Umum -->
-          {{-- <ul class="sidebar-menu mt-4">
+          <ul class="sidebar-menu mt-4">
               <li class="menu-header">Dashboard</li>
               <li class="{{ active_item('Dashboard') }}">
                 <a href="{{ Route('Dashboard') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
               </li>
-              <li class="menu-header">More</li>
+              <li class="menu-header">Menu</li>
               <li class="{{ active_item('pengajuanSurat') }}">
                 <a class="nav-link" href="{{ Route('pengajuanSurat') }}"><i class="fas fa-envelope mt-1"></i> <span>Pengajuan Surat</span></a>
               </li>
@@ -296,8 +243,9 @@
               <li class="{{ active_item('pengumuman') }}">
                 <a class="nav-link" href="{{ Route('pengumuman') }}"><i class="fas fa-bullhorn mt-1"></i> <span>Pengumuman</span></a>
               </li>
-          </ul> --}}
+          </ul>
         <!-- END Pengguna Umum -->
+        @endif
         </aside>
       </div>
 
@@ -341,6 +289,7 @@
   <script src="../node_modules/summernote/dist/summernote-bs4.js"></script>
   <script src="../node_modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
+
   <!-- Template JS File -->
   <script src=" {{ asset('admin/js/scripts.js') }}"></script>
   <script src="{{ asset('admin/js/costum.js') }}"></script>
@@ -350,5 +299,10 @@
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
+
+  <!-- Sweet Alert -->
+   <script src="{{ asset('admin/js/page/modules-sweetalert.js') }}"></script>
+   <script src="{{ asset('js/sweetalert.js') }}"></script>
+   {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
 </body>
 </html>

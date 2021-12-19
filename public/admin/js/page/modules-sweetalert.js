@@ -33,9 +33,10 @@ $("#swal-6").click(function() {
       swal('Poof! Your imaginary file has been deleted!', {
         icon: 'success',
       });
-      } else {
-      swal('Your imaginary file is safe!');
       }
+    //   else {
+    //   swal('Your imaginary file is safe!');
+    //   }
     });
 });
 

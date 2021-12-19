@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Legalisir extends Model
+class SuratKeluar extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nama',
-        'nis',
+        'nomor_surat',
         'perihal',
-        'email',
-        'nomor_telp',
-        'date',
-        'lampiran'
-    ];
-
-    protected $casts = [
-        'konfirmasi_leges' => 'datetime',
+        'tujuan',
+        'lampiran',
+        'date'
     ];
 }

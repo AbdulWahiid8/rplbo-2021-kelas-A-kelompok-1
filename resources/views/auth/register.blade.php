@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card shadow">
-                    <div class="card-body px-5 pt-5">
+                    <div class="card-body px-5 pt-3">
                         <div class="icon-login text-center">
                             <img src="{{ url('image/tut-wuri-handayani.png') }}" alt="Tut Wuri Handayani" width="90">
                             <p class="mt-4">Silakan Register</p>
@@ -13,7 +13,7 @@
                             <div class="row mb-2">
                                 <div class="form-input">
                                     <label for="name" class="col-form-label text-md-right">{{ __('Name') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
                                 </div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -24,15 +24,45 @@
 
                             <div class="row mb-2">
                                 <div class="form-input">
-                                    <label for="email" class="col-form-label text-md-right">{{ __('E-Mail') }}</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <label for="username" class="col-form-label text-md-right">{{ __('Username') }}</label>
+                                    <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" autocomplete="off">
                                 </div>
-                                    @error('email')
+                                    @error('username')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                             </div>
+
+                            <div class="row mb-2">
+                                <div class="form-input">
+                                    <label for="role">Role</label>
+                                    <select id="role" name="role" class="form-select" aria-label="Default select example" required>
+                                        <option selected>Pilih Role..</option>
+                                        <option value="resepsionis">Resepsionis</option>
+                                        <option value="staf">Staf</option>
+                                        <option value="ktu">Kepala Tata Usaha</option>
+                                        <option value="kepsek">Kepala Sekolah</option>
+                                    </select>
+                                </div>
+                                @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                @enderror
+                            </div>
+
+                            {{-- <div class="row mb-2">
+                                <div class="form-input">
+                                    <label for="role" class="col-form-label text-md-right">{{ __('Role') }}</label>
+                                    <input id="role" type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}">
+                                </div>
+                                    @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div> --}}
 
                             <div class="row mb-2">
                                 <div class="form-input">
