@@ -33,3 +33,14 @@ body {
     background: #3440aa;
     color: white;
 }
+/* .close-eye {
+    margin-left: -27px;
+} */
+.icon-pass {
+    /* position: relative; */
+    margin-top: -29px;
+    margin-right: 9px;
+}
+.open-eye {
+    visibility: hidden;
+}

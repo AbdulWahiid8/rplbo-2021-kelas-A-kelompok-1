@@ -14,7 +14,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $data = \App\Models\Surat::get();
+        $data = \App\Models\Surat::paginate(5);
 
         return view('resepsionis.suratMasuk',[
             'data' => $data
@@ -30,16 +30,12 @@ class SuratMasukController extends Controller
         ]);
     }
 
-    public function confirm(Request $request)
+    public function confirm(Request $request, $id)
     {
-        // Surat::create([
-        //     'konfirmasi_surat' => $request->konfirmasi_surat
-        // ]);
-        $confirm = $request->validate([
-            'konfirmasi_surat' => 'confirmed'
+        // dd('berhasil');
+        Surat::find($id)->update([
+            'konfirmasi_surat' => $request->konfirmasi_surat,
         ]);
-        // update($confirm);
-        Surat::where('nama', 'Dinas Pendidikan')->update($confirm);
 
         return redirect()->route('suratmasuk');
     }

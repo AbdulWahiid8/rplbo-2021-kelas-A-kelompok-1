@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Legalisir;
 use App\Http\Requests\StoreLegalisirRequest;
 use App\Http\Requests\UpdateLegalisirRequest;
+use Illuminate\Http\Request;
 
 class LegalisirController extends Controller
 {
@@ -15,7 +16,7 @@ class LegalisirController extends Controller
      */
     public function index()
     {
-        $data = \App\Models\Legalisir::get();
+        $data = \App\Models\Legalisir::paginate(5);
         return view('resepsionis.legalisirMasuk',[
             'data' => $data
         ]);
@@ -28,6 +29,15 @@ class LegalisirController extends Controller
         return view('resepsionis.detailLegalisir', [
             'legalisir' => Legalisir::find($id),
         ]);
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        Legalisir::find($id)->update([
+            'konfirmasi_leges' => $request->konfirmasi_leges
+        ]);
+
+        return redirect()->route('legalisirmasuk');
     }
     /**
      * Show the form for creating a new resource.

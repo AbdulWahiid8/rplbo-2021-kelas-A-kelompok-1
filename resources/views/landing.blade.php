@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="/site.webmanifest">
+
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/costumLanding.css') }}">
@@ -18,7 +24,7 @@
     <title>Home | SISATU</title>
 </head>
 <body>
-    <div class="p-4">
+    <div class="p-4 mt-2">
         <div class="row">
             <div class="logo col-md">
                <img class="d-inline" src="{{ url('image/tut-wuri-handayani.png') }}" alt="" width="48">

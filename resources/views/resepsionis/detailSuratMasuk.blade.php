@@ -11,9 +11,15 @@
                             <img src="{{ url('image/file-preview.png') }}" alt="" width="160">
                             <div>
                                 @if ($surat->lampiran)
-                                    <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
-                                        1490-14400.pdf
-                                    </a>
+                                    @if (Auth::check() && Auth::user()->role === 'resepsionis')
+                                        <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
+                                            {{ $surat->lampiran }}
+                                        </a>
+                                    @else
+                                        <a href="{{ asset('storage/' . $surat->lampiran) }}" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
+                                            {{ $surat->lampiran }}
+                                        </a>
+                                    @endif
                                 @else
                                     <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
                                         Tidak Ada Lampiran
@@ -55,17 +61,17 @@
                             <hr class="mb-4">
                         </div>
                     @if (!$surat->konfirmasi_surat)
-                        <form action="{{ route('confirm') }}" class="text-center ms-5" method="POST">
+                        <form action="{{ route('suratmasuk.confirm', $surat->id) }}" class="text-center ms-5" method="POST">
+                            @method('put')
                             @csrf
                             {{-- @method('put') --}}
-                            <input type="hidden" name="konfirmasi_surat" value="date now">
+                            <input type="hidden" name="konfirmasi_surat" value="2021-12-02">
                             <button type="submit" class="btn btn-success fs-6">Konfirmasi</button>
                         </form>
                     @endif
                     </div>
                 </div>
             </div>
-
         </section>
     @endsection
 </x-master-layout>

@@ -11,9 +11,15 @@
                             <img src="{{ url('image/file-preview.png') }}" alt="" width="160">
                             <div>
                             @if ($legalisir->lampiran)
-                                <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
-                                    1290-12200.pdf
-                                </a>
+                                 @if (Auth::check() && Auth::user()->role === 'resepsionis')
+                                    <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
+                                        {{ $legalisir->lampiran }}
+                                    </a>
+                                @else
+                                    <a href="{{ asset('storage/' . $legalisir->lampiran) }}" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
+                                        {{ $legalisir->lampiran }}
+                                    </a>
+                                @endif
                             @else
                                 <a href="#" class="px-3 btn btn-outline-secondary btn-sm text-decoration-underline text-primary">
                                     Tidak Ada Lampiran
@@ -25,7 +31,7 @@
                             <div class="row mt-2">
                                 <div class="ms-5">
                                     <small class="d-inline btn btn-dark btn-sm shadow-none"># Detail Legalisir Masuk</small>
-                                    <p class="d-inline ms-3 text-dark fw-bolder fs-5">PRA.13/2021/14/22</p>
+                                    <p class="d-inline ms-3 text-dark fw-bolder fs-5">MTSN.10/2021/PKU</p>
                                 </div>
                                 <hr class="mt-2 line-hr">
                                 <div class="detail">
@@ -51,9 +57,10 @@
                             <hr class="mb-4">
                         </div>
                     @if (!$legalisir->konfirmasi_leges)
-                        <form action="" class="text-center ms-5">
-                            <input type="hidden" name="konfirmasi_leges" id="" value="date now">
+                        <form action="{{ route('legalisirmasuk.confirm', $legalisir->id) }}" class="text-center ms-5" method="POST">
+                            @method('put')
                             @csrf
+                            <input type="hidden" name="konfirmasi_leges" value="2021-12-30">
                             <button type="submit" class="btn btn-success fs-6">Konfirmasi</button>
                         </form>
                     @endif

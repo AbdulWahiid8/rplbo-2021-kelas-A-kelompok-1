@@ -15,7 +15,11 @@
                         <h4>Surat Masuk</h4>
                         </div>
                         <div class="card-body">
+                    @if (Auth::check() && Auth::user()->role === 'resepsionis')
                         {{ \App\Models\Surat::get()->count() }}
+                    @else
+                        {{ \App\Models\Surat::where('konfirmasi_surat', '2021-12-02')->get()->count() }}
+                    @endif
                         </div>
                     </div>
                     </div>
@@ -28,10 +32,15 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                        <h4>Leges</h4>
+                        <h4>Legalisir</h4>
                         </div>
                         <div class="card-body">
+                    @if (Auth::check() && Auth::user()->role === 'resepsionis')
                         {{ \App\Models\Legalisir::get()->count() }}
+                    @else
+                        {{ \App\Models\Legalisir::where('konfirmasi_leges', '2021-12-30')->get()->count() }}
+                    @endif
+
                         </div>
                     </div>
                     </div>
@@ -47,7 +56,7 @@
                         <h4>Surat Keluar</h4>
                         </div>
                         <div class="card-body">
-                        1
+                        {{ \App\Models\SuratKeluar::get()->count() }}
                         </div>
                     </div>
                     </div>
@@ -59,10 +68,10 @@
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
-                        <h4>Leges Keluar</h4>
+                        <h4>Legalisir Keluar</h4>
                         </div>
                         <div class="card-body">
-                        4
+                        {{ \App\Models\LegalisirKeluar::get()->count() }}
                         </div>
                     </div>
                     </div>

@@ -16,10 +16,11 @@ class Legalisir extends Model
         'email',
         'nomor_telp',
         'date',
-        'lampiran'
+        'lampiran',
+        'konfirmasi_leges'
     ];
 
-    protected $casts = [
-        'konfirmasi_leges' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'konfirmasi_leges' => 'datetime',
+    // ];
 }

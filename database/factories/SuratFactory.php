@@ -20,6 +20,7 @@ class SuratFactory extends Factory
             'nomor_telp' => $this->faker->phoneNumber(),
             'perihal' => $this->faker->sentence(),
             'date' => $this->faker->date(),
+            'konfirmasi_surat' => '2021-12-02'
         ];
     }
 }

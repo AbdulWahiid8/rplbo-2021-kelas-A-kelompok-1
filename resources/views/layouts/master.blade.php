@@ -11,6 +11,12 @@
   {{-- offline --}}
   <link rel="stylesheet" href="{{ asset('css/font-awesome/all.css') }}">
 
+  <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="/site.webmanifest">
+
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="../node_modules/jqvmap/dist/jqvmap.min.css">
   <link rel="stylesheet" href="../node_modules/weathericons/css/weather-icons.min.css">
@@ -24,9 +30,11 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ asset('css/costumAdmin.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/costumAuth.css') }}"> --}}
 
     <!-- My JS -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/costumAuth.js') }}"></script>
 </head>
 
 <body>
@@ -39,7 +47,7 @@
             <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
             <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
           </ul>
-          <div class="search-element">
+          {{-- <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
             <button class="btn" type="submit"><i class="fas fa-search"></i></button>
             <div class="search-backdrop"></div>
@@ -100,10 +108,10 @@
                 </a>
               </div>
             </div>
-          </div>
+          </div> --}}
         </form>
 
-    @if (Auth::user())
+    @if (Auth::check())
         <ul class="navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -114,7 +122,13 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right mt-2">
                 <div class="dropdown-title">
+                @if (Auth::user()->role === 'kepsek')
+                    You Are <br> <strong class="text-primary fw-bold">Kepala Sekolah</strong>
+                @elseif (Auth::user()->role === 'ktu')
+                    You Are <br> <strong class="text-primary fw-bold">Kepala Tata Usaha</strong>
+                @else
                     You Are <strong class="text-primary fw-bold">{{ Auth::user()->role }}</strong>
+                @endif
                 </div>
                 {{-- <a href="features-profile.html" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
@@ -126,17 +140,14 @@
                     <i class="fas fa-cog"></i> Settings --}}
                 </a>
                 <div class="dropdown-divider"></div>
-                {{-- <a href="{{ url('/') }}" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a> --}}
-                <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                    <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
             </div>
         </li>
         </ul>
@@ -183,14 +194,14 @@
                 <li class="{{ active_item('suratmasuk.staf') }}">
                     <a class="nav-link" href="{{ route('suratmasuk.staf') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
                 </li>
-                <li class="{{ active_item('legalisirmasuk') }}">
-                    <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                <li class="{{ active_item('legalisirmasuk.staf') }}">
+                    <a class="nav-link" href="{{ route('legalisirmasuk.staf') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
                 </li>
-                <li class="{{ active_item('suratkelaur') }}">
-                    <a class="nav-link" href="{{ route('suratkeluar') }}"><i class="fas fa-paper-plane ms-1"></i><span>Surat Keluar</span></a>
+                <li class="{{ active_item('suratkeluar.index') }}">
+                    <a class="nav-link" href="{{ route('suratkeluar.index') }}"><i class="fas fa-paper-plane ms-1"></i><span>Surat Keluar</span></a>
                 </li>
-                <li class="{{ active_item('legalisirkeluar') }}">
-                    <a class="nav-link" href="{{ route('legalisirkeluar') }}"><i class="fas fa-share-square"></i><span>Legalisir Keluar</span></a>
+                <li class="{{ active_item('legalisirkeluar.index') }}">
+                    <a class="nav-link" href="{{ route('legalisirkeluar.index') }}"><i class="fas fa-share-square"></i><span>Legalisir Keluar</span></a>
                 </li>
             </ul>
             <!-- END Staf -->
@@ -198,32 +209,48 @@
             <!-- SibeBar Untuk Kepala Staf Tata Usaha -->
             <ul class="sidebar-menu mt-4">
                 <li class="menu-header">Dashboard</li>
-                <li class="{{ active_item('Dashboard.resepsionis') }}">
-                <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
-                </li>
+                    <li class="{{ active_item('Dashboard.resepsionis') }}">
+                        <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                    </li>
+                <li class="menu-header">User</li>
+                    <li class="{{ active_item('kelolapengguna.index') }}">
+                        <a class="nav-link" href="{{ route('kelolapengguna.index') }}"><i class="fas fa-users"></i><span>Kelola Pengguna</span></a>
+                    </li>
                 <li class="menu-header">Menu</li>
-                <li class="{{ active_item('suratmasuk') }}">
-                <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
-                </li>
-                <li class="{{ active_item('legalisirmasuk') }}">
-                <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
-                </li>
+                    <li class="{{ active_item('suratmasuk.staf') }}">
+                        <a class="nav-link" href="{{ route('suratmasuk.staf') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                    </li>
+                    <li class="{{ active_item('legalisirmasuk.staf') }}">
+                        <a class="nav-link" href="{{ route('legalisirmasuk.staf') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                    </li>
+                    <li class="{{ active_item('suratkelaur.index') }}">
+                        <a class="nav-link" href="{{ route('suratkeluar.index') }}"><i class="fas fa-paper-plane ms-1"></i><span>Surat Keluar</span></a>
+                    </li>
+                    <li class="{{ active_item('legalisirkeluar.index') }}">
+                        <a class="nav-link" href="{{ route('legalisirkeluar.index') }}"><i class="fas fa-share-square"></i><span>Legalisir Keluar</span></a>
+                    </li>
             </ul>
             <!-- END Kepala Staf Tata Usaha -->
         @elseif (Auth::check() && Auth::user()->role === 'kepsek')
             <!-- SibeBar Untuk Kepala Sekolah -->
             <ul class="sidebar-menu mt-4">
                 <li class="menu-header">Dashboard</li>
-                <li class="{{ active_item('Dashboard.resepsionis') }}">
-                <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
-                </li>
+                    <li class="{{ active_item('Dashboard.resepsionis') }}">
+                        <a href="{{ route('Dashboard.resepsionis') }}" class="nav-link"><i class="fas fa-home"></i></i><span>Home</span></a>
+                    </li>
                 <li class="menu-header">Menu</li>
-                <li class="{{ active_item('suratmasuk') }}">
-                <a class="nav-link" href="{{ route('suratmasuk') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
-                </li>
-                <li class="{{ active_item('legalisirmasuk') }}">
-                <a class="nav-link" href="{{ route('legalisirmasuk') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
-                </li>
+                    <li class="{{ active_item('suratmasuk.staf') }}">
+                        <a class="nav-link" href="{{ route('suratmasuk.staf') }}"><i class="fas fa-envelope mt-1"></i> <span>Surat Masuk</span></a>
+                    </li>
+                    <li class="{{ active_item('legalisirmasuk.staf') }}">
+                        <a class="nav-link" href="{{ route('legalisirmasuk.staf') }}"><i class="far fa-sticky-note"></i><span>Legalisir</span></a>
+                    </li>
+                    <li class="{{ active_item('suratkelaur.index') }}">
+                        <a class="nav-link" href="{{ route('suratkeluar.index') }}"><i class="fas fa-paper-plane ms-1"></i><span>Surat Keluar</span></a>
+                    </li>
+                    <li class="{{ active_item('legalisirkeluar.index') }}">
+                        <a class="nav-link" href="{{ route('legalisirkeluar.index') }}"><i class="fas fa-share-square"></i><span>Legalisir Keluar</span></a>
+                    </li>
             </ul>
             <!-- END Kepala Sekolah -->
         @else
@@ -238,7 +265,7 @@
                 <a class="nav-link" href="{{ Route('pengajuanSurat') }}"><i class="fas fa-envelope mt-1"></i> <span>Pengajuan Surat</span></a>
               </li>
               <li class="{{ active_item('pengajuanLegalisir') }}">
-                <a class="nav-link" href="{{ Route('pengajuanLegalisir') }}"><i class="far fa-sticky-note"></i><span>Pengajuan Leges</span></a>
+                <a class="nav-link" href="{{ Route('pengajuanLegalisir') }}"><i class="far fa-sticky-note"></i><span>Pengajuan Legalisir</span></a>
               </li>
               <li class="{{ active_item('pengumuman') }}">
                 <a class="nav-link" href="{{ Route('pengumuman') }}"><i class="fas fa-bullhorn mt-1"></i> <span>Pengumuman</span></a>
@@ -258,16 +285,6 @@
       <x-footer></x-footer>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
 
 
   <!-- My JS -->
@@ -300,7 +317,10 @@
   <!-- Page Specific JS File -->
   <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
 
-  <!-- Sweet Alert -->
+  <!--  -->
+  <script src="{{ asset('admin/js/page/bootstrap-modal.js') }}"></script>
+
+  <!-- Sweet Alert js-->
    <script src="{{ asset('admin/js/page/modules-sweetalert.js') }}"></script>
    <script src="{{ asset('js/sweetalert.js') }}"></script>
    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}

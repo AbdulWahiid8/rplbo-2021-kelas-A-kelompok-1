@@ -17,10 +17,11 @@ class Surat extends Model
         'nomor_surat',
         'nomor_telp',
         'date',
-        'lampiran'
+        'lampiran',
+        'konfirmasi_surat'
     ];
 
-    protected $casts = [
-        'konfirmasi_surat' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'konfirmasi_surat' => 'datetime',
+    // ];
 }

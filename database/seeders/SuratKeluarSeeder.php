@@ -13,6 +13,6 @@ class SuratKeluarSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\SuratKeluar::factory(10)->create();
     }
 }

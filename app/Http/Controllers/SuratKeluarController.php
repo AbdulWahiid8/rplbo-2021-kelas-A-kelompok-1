@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\SuratKeluar;
 use App\Http\Requests\StoreSuratKeluarRequest;
 use App\Http\Requests\UpdateSuratKeluarRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratKeluarController extends Controller
 {
@@ -15,7 +17,9 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        return view('staf.suratKeluar');
+        return view('staf.suratKeluar', [
+            'data' => SuratKeluar::paginate(5)
+        ]);
     }
 
     /**
@@ -25,7 +29,10 @@ class SuratKeluarController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::check() && Auth::user()->role !== 'staf') {
+            abort(403);
+        }
+        return view('staf.tambahSuratKeluar');
     }
 
     /**
@@ -34,9 +41,29 @@ class SuratKeluarController extends Controller
      * @param  \App\Http\Requests\StoreSuratKeluarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSuratKeluarRequest $request)
+    public function store(Request $request)
     {
-        //
+        $getFile = $request->validate([
+            'lampiran' => 'mimes:pdf|file|max:5024'
+        ]);
+
+        // Mengambil file dengan nama asli
+        $getNameFile = $request->file('lampiran')->getClientOriginalName();
+        // menyimpan file di folder file
+        $getFile = $request->file('lampiran')->storeAs('file-surat', $getNameFile);
+
+        SuratKeluar::create([
+            'nama' => $request->nama,
+            'nomor_surat' => $request->noSurat,
+            'perihal' => $request->perihal,
+            'tujuan' => $request->tujuan,
+            'date' => $request->date,
+            'lampiran' => $getFile
+        ]);
+
+        return redirect()
+                ->route('suratkeluar.index')
+                ->with('pesan', 'Surat Berhasil dikeluarkan');
     }
 
     /**
@@ -45,9 +72,11 @@ class SuratKeluarController extends Controller
      * @param  \App\Models\SuratKeluar  $suratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function show(SuratKeluar $suratKeluar)
+    public function show($id)
     {
-        //
+        return view('staf.detailSuratKeluar', [
+            'data' => SuratKeluar::find($id)
+        ]);
     }
 
     /**
@@ -56,9 +85,14 @@ class SuratKeluarController extends Controller
      * @param  \App\Models\SuratKeluar  $suratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function edit(SuratKeluar $suratKeluar)
+    public function edit($id)
     {
-        //
+        if (Auth::check() && Auth::user()->role !== 'staf') {
+            abort(403);
+        }
+        return view('staf.editSuratKeluar', [
+            'data' => SuratKeluar::find($id)
+        ]);
     }
 
     /**
@@ -68,9 +102,28 @@ class SuratKeluarController extends Controller
      * @param  \App\Models\SuratKeluar  $suratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSuratKeluarRequest $request, SuratKeluar $suratKeluar)
+    public function update(Request $request, $id)
     {
-        //
+
+        $getFile = $request->validate([
+            'lampiran' => 'mimes:pdf,doc|file|max:5024'
+        ]);
+
+        // Mengambil file dengan nama asli
+        $getNameFile = $request->file('lampiran')->getClientOriginalName();
+        // menyimpan file di folder file
+        $getFile = $request->file('lampiran')->storeAs('file-surat', $getNameFile);
+
+        SuratKeluar::find($id)->update([
+            'nama' => $request->nama,
+            'nomor_surat' => $request->noSurat,
+            'perihal' => $request->perihal,
+            'tujuan' => $request->tujuan,
+            'date' => $request->date,
+            'lampiran' => $getFile
+        ]);
+
+        return redirect()->route('suratkeluar.index');
     }
 
     /**
@@ -79,8 +132,10 @@ class SuratKeluarController extends Controller
      * @param  \App\Models\SuratKeluar  $suratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuratKeluar $suratKeluar)
+    public function destroy($id)
     {
-        //
+        SuratKeluar::find($id)->delete();
+
+        return back();
     }
 }

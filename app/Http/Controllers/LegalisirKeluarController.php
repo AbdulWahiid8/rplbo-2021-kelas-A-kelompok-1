@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\LegalisirKeluar;
 use App\Http\Requests\StoreLegalisirKeluarRequest;
 use App\Http\Requests\UpdateLegalisirKeluarRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LegalisirKeluarController extends Controller
 {
@@ -15,7 +17,9 @@ class LegalisirKeluarController extends Controller
      */
     public function index()
     {
-        return view('staf.legalisirKeluar');
+        return view('staf.legalisirKeluar', [
+            'data' => LegalisirKeluar::paginate(5)
+        ]);
     }
 
     /**
@@ -25,7 +29,11 @@ class LegalisirKeluarController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::check() && Auth::user()->role !== 'staf') {
+            abort(403);
+        }
+
+        return view('staf.tambahLegalisirKeluar');
     }
 
     /**
@@ -34,9 +42,27 @@ class LegalisirKeluarController extends Controller
      * @param  \App\Http\Requests\StoreLegalisirKeluarRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLegalisirKeluarRequest $request)
+    public function store(Request $request)
     {
-        //
+        $getFile = $request->validate([
+            'lampiran' => 'mimes:pdf,doc|file|max:5024'
+        ]);
+
+        // Mengambil file dengan nama asli
+        $getNameFile = $request->file('lampiran')->getClientOriginalName();
+        // menyimpan file di folder file
+        $getFile = $request->file('lampiran')->storeAs('file-surat', $getNameFile);
+        LegalisirKeluar::create([
+            'nama' => $request->namaLeges,
+            'nis' => $request->nis,
+            'email' => $request->email,
+            'date' => $request->date,
+            'lampiran' => $getFile,
+        ]);
+
+        return redirect()
+                ->route('legalisirkeluar.index')
+                ->with('pesan', 'Data Legalisir Berhasil ditambahkan');
     }
 
     /**
@@ -45,9 +71,15 @@ class LegalisirKeluarController extends Controller
      * @param  \App\Models\LegalisirKeluar  $legalisirKeluar
      * @return \Illuminate\Http\Response
      */
-    public function show(LegalisirKeluar $legalisirKeluar)
+    public function show($id)
     {
-        //
+        if (Auth::check() && Auth::user()->role !== 'staf') {
+            abort(403);
+        }
+
+        return view('staf.detailLegalisirKeluar', [
+            'data' => LegalisirKeluar::find($id),
+        ]);
     }
 
     /**
@@ -56,9 +88,11 @@ class LegalisirKeluarController extends Controller
      * @param  \App\Models\LegalisirKeluar  $legalisirKeluar
      * @return \Illuminate\Http\Response
      */
-    public function edit(LegalisirKeluar $legalisirKeluar)
+    public function edit($id)
     {
-        //
+        return view('staf.editLegalisirKeluar', [
+            'data' => LegalisirKeluar::find($id),
+        ]);
     }
 
     /**
@@ -68,9 +102,17 @@ class LegalisirKeluarController extends Controller
      * @param  \App\Models\LegalisirKeluar  $legalisirKeluar
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLegalisirKeluarRequest $request, LegalisirKeluar $legalisirKeluar)
+    public function update(Request $request, $id)
     {
-        //
+        LegalisirKeluar::find($id)->update([
+            'nama' => $request->namaLeges,
+            'nis' => $request->nis,
+            'email' => $request->email,
+            'date' => $request->date,
+        ]);
+
+        return redirect()
+                ->route('legalisirkeluar.index');
     }
 
     /**
@@ -79,8 +121,10 @@ class LegalisirKeluarController extends Controller
      * @param  \App\Models\LegalisirKeluar  $legalisirKeluar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LegalisirKeluar $legalisirKeluar)
+    public function destroy($id)
     {
-        //
+        LegalisirKeluar::find($id)->delete();
+
+        return back();
     }
 }

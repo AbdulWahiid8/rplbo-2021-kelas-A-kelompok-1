@@ -27,11 +27,11 @@
                                 </div>
                             </div>
                             <input id="nis" name="nis" type="text" class="form-control phone-number">
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                             {{-- <p class="text-secondary">(-) Isi jika Tidak Ada</p> --}}
-                        <div class="invalid-feedback">
-                            Field Tidak Boleh Kosong!
-                        </div>
                     </div>
                      <div class="form-group">
                         <label for="noTelp">Nomor Telepon <span class="text-danger">*</span></label>
@@ -42,9 +42,9 @@
                                 </div>
                             </div>
                             <input id="noTelp" name="telepon" type="text" class="form-control phone-number" required>
-                        </div>
-                        <div class="invalid-feedback">
-                            Field Tidak Boleh Kosong!
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,9 +56,9 @@
                                 </div>
                             </div>
                             <input id="email" name="email" type="email" class="form-control" required>
-                        </div>
-                        <div class="invalid-feedback">
-                            Field Tidak Boleh Kosong!
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -70,9 +70,9 @@
                                 </div>
                             </div>
                             <input id="perihal" name="perihal" type="text" class="form-control" required>
-                        </div>
-                        <div class="invalid-feedback">
-                            Field Tidak Boleh Kosong!
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,19 +84,27 @@
                                 </div>
                             </div>
                             <input id="noSurat" name="noSurat" type="text" class="form-control" required>
-                        </div>
-                        <div class="invalid-feedback">
-                            Field Tidak Boleh Kosong!
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                     </div>
                     <div class="row form-group form-surat">
-                        <div class="col-md">
+                        <div class="col-md mb-3">
                             <label for="lampiran">Lampiran</label>
-                            <input id="lampiran" name="lampiran" class="form-control" type="file">
+                            <input id="lampiran" name="lampiran" class="form-control @error('lampiran') is-invalid @enderror" type="file">
+                        @error('lampiran')
+                            <div class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         </div>
                         <div class="col-md">
                             <label for="date">Tanggal <span class="text-danger">*</span></label>
                             <input id="date" name="date" type="date" class="form-control datepicker" required>
+                            <div class="invalid-feedback">
+                                Field Tidak Boleh Kosong!
+                            </div>
                         </div>
                     </div>
                     <!-- <small class="text-secondary">Pastikan data yang anda isi benar</small> -->

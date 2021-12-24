@@ -14,7 +14,11 @@ class SuratKeluarFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama' => $this->faker->name(),
+            'nomor_surat' => $this->faker->postcode(),
+            'tujuan' => $this->faker->address(),
+            'perihal' => $this->faker->sentence(),
+            'date' => $this->faker->date(),
         ];
     }
 }

@@ -5,6 +5,7 @@ function actionPass() {
 
     if (input.type === "password") {
         input.type = "text";
+        iconShow.style.visibility="visible";
         iconShow.style.display = "block";
         iconHide.style.display = "none";
     } else {

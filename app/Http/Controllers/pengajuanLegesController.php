@@ -14,6 +14,15 @@ class pengajuanLegesController extends Controller
 
     public function create(Request $request)
     {
+        $getFile = $request->validate([
+            'lampiran' => 'mimes:pdf,doc|file|max:5024'
+        ]);
+
+        // Mengambil file dengan nama asli
+        $getNameFile = $request->file('lampiran')->getClientOriginalName();
+        // menyimpan file di folder file
+        $getFile = $request->file('lampiran')->storeAs('file-legalisir', $getNameFile);
+
         Legalisir::create([
             'nama' => $request->namaLeges,
             'nis' => $request->nis,
@@ -21,7 +30,7 @@ class pengajuanLegesController extends Controller
             'email' => $request->email,
             'date' => $request->date,
             'perihal' => $request->perihal,
-            //'lampiran'
+            'lampiran' => $getFile
         ]);
 
         return redirect('/Dashboard')->with('message', 'Lampiran Legalisir Anda Akan Kami Proses');

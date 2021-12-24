@@ -76,9 +76,14 @@
                     </div>
 
                     <div class="row form-group form-surat">
-                        <div class="col-md">
+                        <div class="col-md mb-3">
                             <label for="lampiran">Lampiran</label>
-                            <input name="lampiran" class="form-control" type="file" id="lampiran">
+                            <input name="lampiran" class="form-control @error('lampiran') is-invalid @enderror" type="file" id="lampiran">
+                        @error('lampiran')
+                            <div class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         </div>
                         <div class="col-md">
                             <label for="date">Tanggal <span class="text-danger">*</span></label>
