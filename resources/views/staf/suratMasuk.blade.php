@@ -49,20 +49,12 @@
                                         <div class="d-flex">
                                             <a href="{{ route('suratmasuk.detail', $item->id) }}" class="btn btn-icon btn-sm btn-success mb-2 me-2"><i class="far fa-folder-open"></i></a>
                                             <a href="{{ route('suratmasuk.edit', $item->id) }}" class="btn btn-icon btn-sm btn-info mb-2 me-2"><i class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('suratdestroy', $item->id) }}" method="POST" >
+                                            <!-- SweetAlert Delete -->
+                                            <form action="{{ route('suratdestroy', $item->id) }}" method="POST" id="data-{{ $item->id }}">
                                                 @method('delete')
                                                 @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-danger mb-2" id="swal-6"> <i class="far fa-trash-alt"></i></button>
                                             </form>
-                                            {{-- <a href="#" data-id="{{ $item->id }}" class="btn btn-icon btn-sm btn-danger mb-2" id="swal-6">
-                                                <form action="{{ route('suratdestroy', $item->id) }}" id="delete{{ $item->id }}" method="POST">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
-                                                <i class="far fa-trash-alt"></i>
-                                            </a> --}}
-
-                                            {{-- </a> --}}
+                                            <button onclick="deleteRow({{ $item->id }})" class="btn btn-icon btn-sm btn-danger mb-2"> <i class="far fa-trash-alt"></i></button>
                                         </div>
                                     @else
                                         <a href="{{ route('suratmasuk.detail', $item->id) }}" class="btn btn-primary">Detail</a>

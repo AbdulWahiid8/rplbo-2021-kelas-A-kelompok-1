@@ -32,3 +32,13 @@ margin-left: 150px;
 .card-pengguna{
     padding: 0 150px;
 }
+
+.icon-pass {
+    /* position: relative; */
+    margin-top: -31px;
+    margin-right: 9px;
+}
+
+.open-eye {
+    visibility: hidden;
+}

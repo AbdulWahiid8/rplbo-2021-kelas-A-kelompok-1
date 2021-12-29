@@ -19,9 +19,10 @@ $("#swal-4").click(function() {
 $("#swal-5").click(function() {
 	swal('Good Job', 'You clicked the button!', 'error');
 });
-function swal() {
-    $("#swal-6").click(function() {
-        // id = e.target.dataset.id;
+
+    $("#swal-6").on('submit', function() {
+        var form = this;
+        // e.preventDefault();
       swal({
           title: 'Apakah Anda Yakin?',
         //   text: 'Once deleted, you will not be able to recover this imaginary file!',
@@ -37,7 +38,25 @@ function swal() {
           }
         });
     });
-}
+
+    // SweetAlert Yang Berfungsi
+    function deleteRow(id)
+    {
+        swal({
+            title: "Apakah Anda Yakin?",
+            //   text: 'Once deleted, you will not be able to recover this imaginary file!',
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $('#data-'+id).submit();
+                swal("Data Berhasil Dihapus", {
+                    icon: "success",
+                });
+            }
+        });
+    }
 
 $("#swal-7").click(function() {
   swal({

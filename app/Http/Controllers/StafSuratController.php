@@ -49,6 +49,8 @@ class StafSuratController extends Controller
 
     public function edit($id)
     {
+        // $get = Surat::find($id);
+        // dd($get->lampiran);
         return view('staf.editSuratMasuk',[
             'data' => Surat::find($id)
         ]);
@@ -57,13 +59,16 @@ class StafSuratController extends Controller
     public function update(Request $request, $id)
     {
         $getFile = $request->validate([
-            'lampiran' => 'mimes:pdf,doc|file|max:5024'
+            'lampiran' => 'mimes:pdf|file|max:5024'
         ]);
+        if($request->file('lampiran')) {
+            // Mengambil file dengan nama asli
+            $getNameFile = $request->file('lampiran')->getClientOriginalName();
+            // menyimpan file di folder file
+            $getFile['lampiran'] = $request->file('lampiran')->storeAs('file-surat', uniqid() . $getNameFile );
 
-        // Mengambil file dengan nama asli
-        $getNameFile = $request->file('lampiran')->getClientOriginalName();
-        // menyimpan file di folder file
-        $getFile = $request->file('lampiran')->storeAs('file-surat', $getNameFile);
+        }
+        dd($getFile);
 
         // $data = $request->all();
         Surat::find($id)->update([

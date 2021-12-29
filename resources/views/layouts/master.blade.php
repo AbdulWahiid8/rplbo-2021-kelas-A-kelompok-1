@@ -30,7 +30,6 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="{{ asset('css/costumAdmin.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/costumAuth.css') }}"> --}}
 
     <!-- My JS -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -312,12 +311,12 @@
   <script src="{{ asset('admin/js/costum.js') }}"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{ asset('admin/js/page/forms-advanced-forms.js') }}../assets/js/page/forms-advanced-forms.js"></script>
+  <script src="{{ asset('admin/js/page/forms-advanced-forms.js') }}"></script>
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('admin/js/page/index-0.js') }}"></script>
 
-  <!--  -->
+  <!-- Modal  -->
   <script src="{{ asset('admin/js/page/bootstrap-modal.js') }}"></script>
 
   <!-- Sweet Alert js-->

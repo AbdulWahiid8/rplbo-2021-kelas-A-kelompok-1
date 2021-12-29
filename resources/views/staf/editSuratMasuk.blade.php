@@ -90,7 +90,7 @@
                         <div class="row form-group form-surat">
                             <div class="col-md">
                                 <label for="lampiran">Lampiran</label>
-                                <input id="lampiran" name="lampiran" class="form-control @error('lampiran') is-invalid @enderror" type="file">
+                                <input id="lampiran" name="lampiran" value="{{ $data->lampiran }}" class="form-control @error('lampiran') is-invalid @enderror" type="file">
                                 @error('lampiran')
                                     <div class="invalid-feedback" role="alert">
                                         {{ $message }}

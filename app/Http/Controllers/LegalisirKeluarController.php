@@ -73,9 +73,6 @@ class LegalisirKeluarController extends Controller
      */
     public function show($id)
     {
-        if (Auth::check() && Auth::user()->role !== 'staf') {
-            abort(403);
-        }
 
         return view('staf.detailLegalisirKeluar', [
             'data' => LegalisirKeluar::find($id),
